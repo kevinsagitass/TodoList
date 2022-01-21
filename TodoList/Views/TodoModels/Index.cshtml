@@ -1,0 +1,58 @@
+﻿@model TodoList.Models.TodoViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h1>Todo List</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-success float-left" asp-action="Create">Create New</a>
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        Todo Name
+                    </th>
+                    <th>
+                        Priority
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <form method="post" asp-action="DoneTodo">
+                    @for (var i = 0; i < Model.todos.Length; i++)
+                    {
+                        <input type="number" style="display: none" asp-for="@Model.todos[i].Id" />
+                        <tr>
+                            <td>
+                                <input class="checkbox" style="height: 20px; width: 100px" type="checkbox" asp-for="@Model.todos[i].Checked" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.todos[i].todoName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.todos[i].Priority)
+                            </td>
+                            <td>
+                                <a class="btn btn-warning mr-3" asp-action="Edit" asp-route-id="@Model.todos[i].Id">Edit</a>
+                                <a class="btn btn-primary mr-3" asp-action="Details" asp-route-id="@Model.todos[i].Id">Details</a>
+                                <a class="btn btn-danger mr-3" asp-action="Delete" asp-route-id="@Model.todos[i].Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                    <input type="submit" class="btn btn-success float-right" name="DoneBtn" value="Done" />
+                </form>
+            </tbody>
+        </table>
+
+    </div>
+</div>

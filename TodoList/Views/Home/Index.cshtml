@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<div class="row text-center mb-10">
+    <div class="col-md-12">
+        <h1><i class="fas fa-check-square"></i> Todo List</h1>
+        <p>Create Your List and Do Your Things!</p>
+    </div>
+</div>
+
+<div class="row text-center mb-5">
+    <div class="col-md-12 text-center">
+        <p id="appDesc">Todo List App is Made Just for You!. This apps will help you to schedule your things and never forget about anything! anymore!</p>
+    </div>
+</div>
+
+<hr />
+
+@if (HttpContextAccessor.HttpContext.Session.GetInt32("UserId") == null)
+{
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <p>Have an Account Already ? Login Here</p>
+            <a class="btn btn-success" asp-controller="Auth" asp-action="Login" type="button">Login</a>
+        </div>
+        <div class="col-md-6 text-center">
+            <p>Don't Have an Account ? Register Here</p>
+            <a class="btn btn-primary" asp-controller="Auth" asp-action="Register" type="button">Register</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-6">
+            <p>Hello Again! This is Your Top 3 Most Important Things To Do for Now!</p>
+        </div>
+        <div class="col-md-6">
+            @if (ViewBag.todoList == null || ViewBag.todoList.Count == 0)
+            {
+                <div class="text-danger">
+                    <p>There is Currently No List!</p>
+                </div>
+            }
+            else
+            {
+                @foreach (var todo in ViewBag.todoList)
+                {
+                    <h3>@(ViewBag.todoList.IndexOf(todo) + 1). @todo.todoName</h3>
+                }
+            }
+        </div>
+    </div>
+}

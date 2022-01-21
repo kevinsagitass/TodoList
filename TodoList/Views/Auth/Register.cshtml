@@ -1,0 +1,45 @@
+﻿@model TodoList.Models.UserModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+    <div class="row text-center">
+        <div class="col-md-6 mx-auto shadow-sm p-3 mb-5 bg-white rounded">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Register</h1>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Register">
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="Email" class="control-label"></label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" asp-for="Email" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label asp-for="Password" class="control-label"></label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" asp-for="Password" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Login" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="text-danger"><p>@ViewBag.Msg</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

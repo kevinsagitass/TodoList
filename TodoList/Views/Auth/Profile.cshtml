@@ -1,0 +1,59 @@
+﻿@model TodoList.Models.UserModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="row mb-3">
+    <div class="col-md-12 text-center">
+        <label id="imageLabel" for="file-input">
+            @if (@ViewBag.user.userProfilePic == null)
+            {
+                <img src="~/Image/default-user-image.png" alt="User Profile" style="width: 200px">
+            }
+            else
+            {
+                <img src="~/Image/@ViewBag.user.userProfilePic" alt="User Profile" style="width: 200px">
+            }
+        </label>
+        <div class="text-danger"><p>@ViewBag.fileMsg</p></div>
+        <form asp-controller="Auth" asp-action="SaveImage" method="post" enctype="multipart/form-data">
+            <input name="file" style="display: none" id="file-input" type="file" accept="image/*" onchange="form.submit()" />
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <label class="font-italic">@ViewBag.user.Email</label>
+    </div>
+    <div class="col-md-12 text-center">
+        <label class="font-italic mr-3">Todos Done: </label><label class="font-italic">@ViewBag.user.doneTodo</label>
+    </div>
+</div>
+    
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="float-left"><i class="fas fa-tasks"></i> Done Todos</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Todo Name</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var done in ViewBag.doneTodos)
+                {
+                    <tr>
+                        <td>
+                            @done.todoName
+                        </td>
+                        <td>
+                            @done.doneDate
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

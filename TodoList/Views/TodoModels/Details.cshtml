@@ -1,0 +1,42 @@
+﻿@model TodoList.Models.TodoModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row text-center">
+    <div class="col-md-6 mx-auto shadow-sm p-3 mb-5 bg-white rounded">
+        <div class="card">
+            <div class="card-header">
+                <h1>Todo Details</h1>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-md-6">
+                        @Html.DisplayNameFor(model => model.todoName)
+                    </dt>
+                    <dd class="col-md-6">
+                        @Html.DisplayFor(model => model.todoName)
+                    </dd>
+                    <dt class="col-md-6">
+                        @Html.DisplayNameFor(model => model.Priority)
+                    </dt>
+                    <dd class="col-md-6">
+                        @Html.DisplayFor(model => model.Priority)
+                    </dd>
+                </dl>
+            </div>
+            <div class="card-footer d-flex justify-content-around">
+                <a class="btn btn-warning mr-3" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                <a class="btn btn-primary mr-3" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    
+</div>
+<div>
+    
+</div>
